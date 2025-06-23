@@ -9,7 +9,7 @@
 
 ---
 
-## 🎯 Fragenkatalog
+## 🎯 Vollständiger Fragenkatalog (20 Fragen)
 
 ### **Frage 1: Belehrung Fachraum** (Lückentext)
 **Schüler-Verhalten im Fachraum:**
@@ -36,11 +36,11 @@
 ### **Frage 3: Wer hilft bei Problemen?** (Multiple Choice)
 **Bei wem melde ich mich, wenn ich Probleme mit der Technik habe?**
 
-✅ **Richtige Antworten:**
-- Bei der betreuenden Lehrkraft
-- Bei der Schulleitung
+✅ **Richtige Antwort:**
+- Bei der betreuenden Lehrkraft oder über das Ticketsystem (PITKo)
 
 ❌ **Falsche Antworten:**
+- Beim Klassenlehrer (hat keine Administratorrechte)
 - Beim Sekretariat (hat keine Administratorrechte)
 - Ich benutze die Zugangsdaten eines Mitschülers (niemals Passwörter weitergeben!)
 
@@ -61,22 +61,20 @@
 ---
 
 ### **Frage 6: HomeInfoPoint** (Wahr/Falsch)
-**"Ich habe meine Zugangsdaten für die Zensurenübersicht HomeInfoPoint vergessen."**
+**"Ich habe meine Zugangsdaten für die Zensurenübersicht HomeInfoPoint vergessen. Für diesen Zugang ist nur das Sekretariat zuständig."**
 
-✅ **Wahr** - Das kann passieren, dann Lehrkraft fragen
+✅ **Wahr** - HomeInfoPoint wird vom Sekretariat verwaltet
 
 ---
 
-### **Frage 7: Putzdienst** (Multiple Choice)
-**Was machen Schüler beim Putzdienst?**
+### **Frage 7: Putzdienst/Strafen** (Multiple Choice)
+**Was machen Schüler beim Putzdienst? (Welche Aufgaben erhalte ich, wenn ich mich nicht an die Fachraumordnung halte?)**
 
 ✅ **Richtige Antworten (jeweils 25%):**
+- Tische abwischen
 - Fußboden säubern und schwarze Streifen auf dem Fußboden weg radieren
 - Schränke und Regale abwischen
 - Tastaturen säubern, Monitore putzen
-
-❌ **Falsche Antworten:**
-- [Andere nicht genannte Tätigkeiten]
 
 ---
 
@@ -93,30 +91,102 @@
 
 ---
 
-### **Frage 9: Zugänge** (Multiple Choice)
-**"Ich habe mein Passwort vergessen?" - Was mache ich?**
+### **Frage 9: Internetnutzung im Fachraum** (Multiple Choice)
+**Welche Aussagen zur Internetnutzung im Fachraum sind richtig?**
 
-✅ **Richtige Antwort:**
-- Ich melde mich bei der betreuenden Lehrkraft
+✅ **Richtige Antworten (jeweils 50%):**
+- Internetnutzung ist nur nach Ansage durch die Lehrkraft erlaubt
+- Internetnutzung ist nur auf von der Lehrkraft genehmigten Seiten erlaubt
 
-❌ **Falsche Antworten:**
-- Ich melde mich beim Sekretariat (hat keine Administratorrechte)
-- Ich benutze die Zugangsdaten eines Mitschülers (niemals!)
+❌ **Falsche Antworten (jeweils -50%):**
+- Internetnutzung ist jederzeit erlaubt
+- In der Pause darf das Internet frei genutzt werden
 
 ---
 
-### **Frage 10-20: Weitere Fragen** 
-*[Die vollständige XML-Datei enthält weitere Fragen zu:]*
-- **Schullogin-Navigation**
-- **Moodle-Bedienung** 
-- **Passwort-Sicherheit**
-- **Internetnutzung im Unterricht**
-- **Datenschutz-Grundlagen**
-- **Technische Probleme lösen**
-- **Apps für den Schulalltag**
-- **Cloud-Dienste verstehen**
-- **Verhaltensregeln Details**
-- **Notfall-Kontakte**
+### **Frage 10: Speicherorte** (Multiple Choice)
+**Welche Speicherorte werden Dir zur Verfügung gestellt an denen du dauerhaft Deine Daten speichern kannst?**
+
+✅ **Richtige Antworten (jeweils 33,33%):**
+- Cloud-Speicher auf LernSax.de
+- Cloud-Speicher auf Schullogin.de
+- Netzlaufwerkspeicher in der Schule
+
+❌ **Falsche Antworten (jeweils -33,33%):**
+- Lokaler Speicher an einem Computer
+- Lokaler Speicher auf der Digitalen Tafel
+- Cloudspeicher auf osrw.de
+- Cloudspeicher auf TikTok
+
+---
+
+### **Frage 11: LernSax collaborativ** (Wahr/Falsch)
+**"Im LernSax, in der Dateiablage der Klasse, kann ich Dateien mit Mitschülern gemeinsam in OnlyOffice bearbeiten."**
+
+✅ **Wahr** - Kollaborative Bearbeitung ist möglich
+
+---
+
+### **Frage 12: Lokales Speichern** (Wahr/Falsch)
+**"Wenn ich in der Schule an einem Schüler-PC eine Datei lokal (z.B. im Downloadordner oder in Dokumente) speichere, sind die Dateien nach einem Neustart automatisch gelöscht."**
+
+✅ **Wahr** - Lokale Daten werden bei Neustart gelöscht
+
+---
+
+### **Frage 13: MS Office** (Wahr/Falsch)
+**"In LernSax und in Schullogin habe ich die Möglichkeit, Microsoft Office (Word, Excel, PowerPoint) und NetFlix zu starten."**
+
+❌ **Falsch** - Netflix ist nicht verfügbar, nur Office-Anwendungen
+
+---
+
+### **Frage 14: OnlyOffice** (Wahr/Falsch)
+**"In LernSax unter Datei und in der Dateiablage von Schullogin habe ich die Möglichkeit, Dokumente (Texte, Präsentation, Tabellenkalkulation) zu erstellen und mit OnlyOffice direkt online zu bearbeiten."**
+
+✅ **Wahr** - OnlyOffice ist integriert verfügbar
+
+---
+
+### **Frage 15: Schulserver** (Wahr/Falsch)
+**"Auf den Schulserver und mein Netzlaufwerk der Schule kann ich auch von zu Hause aus zugreifen."**
+
+❌ **Falsch** - Nur über Cloud-Dienste, nicht direkt auf Schulserver
+
+---
+
+### **Frage 16: Moodle-Navigation** (Multiple Choice) ⭐**NEU**
+**Wie findest du deinen Informatik-Kurs in Moodle am schnellsten?**
+
+✅ **Richtige Antwort:**
+- Über das Dashboard oder "Meine Kurse"
+
+❌ **Falsche Antworten:**
+- Über die Suchfunktion nach "Computer"
+- Über den Kalender
+- Über die Mitteilungen
+
+---
+
+### **Frage 17: Schullogin-Apps** (Multiple Choice) ⭐**NEU**
+**Welche Apps findest du standardmäßig in deinem Schullogin?**
+
+✅ **Richtige Antworten (mehrere möglich):**
+- LernSax
+- Moodle  
+- HomeInfoPoint
+
+❌ **Falsche Antworten:**
+- Instagram
+- WhatsApp
+- TikTok
+
+---
+
+### **Frage 18: Passwort-Sicherheit** (Wahr/Falsch)
+**"Mein Schullogin-Passwort darf ich meinem besten Freund geben, damit er mir bei den Hausaufgaben helfen kann."**
+
+❌ **Falsch** - Passwörter niemals weitergeben!
 
 ---
 
@@ -128,6 +198,8 @@
 - **Alle Computerraum-Regeln** kennen
 - **Passwort-Sicherheit** verstehen
 - **Bei Problemen** die richtige Hilfe finden
+- **Speicherorte** unterscheiden können
+- **Apps** in Schullogin finden
 
 ### 📚 **Lernmaterialien:**
 - **Belehrungstext:** [OSRW Informatik erste Stunde](https://osrw.de/fachschaften/informatik/erste-stunde/)
