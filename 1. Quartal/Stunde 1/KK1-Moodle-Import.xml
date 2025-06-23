@@ -13,9 +13,9 @@
 
 <!-- question: 217112  -->
   <question type="ddwtos">
-    <n>
+    <name>
       <text>Belehrung Fachraum</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<ul>
 <li><strong>Schüler-Verhalten im Fachraum</strong>
@@ -98,9 +98,9 @@
 
 <!-- question: 217113  -->
   <question type="gapselect">
-    <n>
+    <name>
       <text>Hilfreiche Apps</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Apps, die mir in der Schule helfen:</p>
 <p>[[1]] ist die Lernplattform des Bundeslandes [[2]].</p>
@@ -162,9 +162,9 @@
 
 <!-- question: 217123  -->
   <question type="multichoice">
-    <n>
+    <name>
       <text>Zugänge</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Ich habe mein Passwort vergessen? Was kann ich tun?</p>]]></text>
     </questiontext>
@@ -217,9 +217,9 @@
 
 <!-- question: 217124  -->
   <question type="truefalse">
-    <n>
+    <name>
       <text>Cloudzugriff</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Auf LernSax und die Dateiablage von Schullogin kann ich nur in der Schule zugreifen.</p>]]></text>
     </questiontext>
@@ -246,9 +246,9 @@
 
 <!-- question: 217125  -->
   <question type="truefalse">
-    <n>
+    <name>
       <text>Dateiablage Cloud</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>In LernSax unter Datei und in der Dateiablage von Schullogin habe ich die Möglichkeit, Dateien hochzuladen.</p>]]></text>
     </questiontext>
@@ -275,9 +275,9 @@
 
 <!-- question: 217126  -->
   <question type="truefalse">
-    <n>
+    <name>
       <text>HomeInfoPoint</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Ich habe meine Zugangsdaten für die Zensurenübersicht HomeInfoPoint vergessen. Für diesen Zugang ist nur das Sekretariat zuständig.</p>]]></text>
     </questiontext>
@@ -304,9 +304,9 @@
 
 <!-- question: 217120 - Speicherorte (KORRIGIERT) -->
   <question type="multichoice">
-    <n>
+    <name>
       <text>Speicherorte</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Welche Speicherorte werden Dir zur Verfügung gestellt an denen du dauerhaft Deine Daten speichern kannst?</p>]]></text>
     </questiontext>
@@ -371,9 +371,9 @@
 
 <!-- question: 217140 - Moodle Navigation (NEU) -->
   <question type="multichoice">
-    <n>
+    <name>
       <text>Moodle Navigation</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Wie findest du deinen Informatik-Kurs in Moodle am schnellsten?</p>]]></text>
     </questiontext>
@@ -426,9 +426,9 @@
 
 <!-- question: 217141 - Schullogin Apps (NEU KORRIGIERT) -->
   <question type="multichoice">
-    <n>
+    <name>
       <text>Schullogin Apps</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Welche Apps/Dienste findest du standardmäßig in deinem Schullogin?</p>]]></text>
     </questiontext>
@@ -493,9 +493,9 @@
 
 <!-- question: 217142 - Nextcloud (NEU) -->
   <question type="truefalse">
-    <n>
+    <name>
       <text>Dateiablage Nextcloud</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Die Dateiablage in Schullogin basiert auf Nextcloud und ermöglicht es mir, von überall auf meine Schuldateien zuzugreifen.</p>]]></text>
     </questiontext>
@@ -522,9 +522,9 @@
 
 <!-- question: 217143 - Unterschied HomeInfoPoint vs Schullogin (NEU) -->
   <question type="multichoice">
-    <n>
+    <name>
       <text>HomeInfoPoint vs Schullogin</text>
-    </n>
+    </name>
     <questiontext format="html">
       <text><![CDATA[<p>Was ist der Unterschied zwischen HomeInfoPoint und Schullogin?</p>]]></text>
     </questiontext>
