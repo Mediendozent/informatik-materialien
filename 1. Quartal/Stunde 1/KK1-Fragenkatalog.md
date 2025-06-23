@@ -109,7 +109,7 @@
 
 ✅ **Richtige Antworten (jeweils 33,33%):**
 - Cloud-Speicher auf LernSax.de
-- Cloud-Speicher auf Schullogin.de
+- Cloud-Speicher auf Schullogin.de (Nextcloud)
 - Netzlaufwerkspeicher in der Schule
 
 ❌ **Falsche Antworten (jeweils -33,33%):**
@@ -168,15 +168,16 @@
 
 ---
 
-### **Frage 17: Schullogin-Apps** (Multiple Choice) ⭐**NEU**
-**Welche Apps findest du standardmäßig in deinem Schullogin?**
+### **Frage 17: Schullogin-Apps** (Multiple Choice) ⭐**NEU - KORRIGIERT**
+**Welche Apps/Dienste findest du standardmäßig in deinem Schullogin?**
 
 ✅ **Richtige Antworten (mehrere möglich):**
 - LernSax
 - Moodle  
-- HomeInfoPoint
+- Dateiablage (Nextcloud)
 
 ❌ **Falsche Antworten:**
+- HomeInfoPoint (ist separater Dienst)
 - Instagram
 - WhatsApp
 - TikTok
@@ -190,16 +191,37 @@
 
 ---
 
+### **Frage 19: Dateiablage Nextcloud** (Wahr/Falsch) ⭐**NEU**
+**"Die Dateiablage in Schullogin basiert auf Nextcloud und ermöglicht es mir, von überall auf meine Schuldateien zuzugreifen."**
+
+✅ **Wahr** - Nextcloud ist die Cloud-Lösung in Schullogin
+
+---
+
+### **Frage 20: Unterschied HomeInfoPoint vs. Schullogin** (Multiple Choice) ⭐**NEU**
+**Was ist der Unterschied zwischen HomeInfoPoint und Schullogin?**
+
+✅ **Richtige Antwort:**
+- HomeInfoPoint zeigt nur Noten an, Schullogin ist das zentrale Portal für alle Schul-Apps
+
+❌ **Falsche Antworten:**
+- HomeInfoPoint und Schullogin sind dasselbe
+- HomeInfoPoint ist Teil von Schullogin
+- Schullogin zeigt nur Noten an
+
+---
+
 ## 🎯 **Tipps zur Vorbereitung**
 
 ### ✅ **Das solltest du können:**
-- **Schullogin-Oberfläche** sicher bedienen
+- **Schullogin-Oberfläche** sicher bedienen und Apps finden
 - **Moodle-Kurs** öffnen und navigieren  
 - **Alle Computerraum-Regeln** kennen
 - **Passwort-Sicherheit** verstehen
 - **Bei Problemen** die richtige Hilfe finden
 - **Speicherorte** unterscheiden können
-- **Apps** in Schullogin finden
+- **Unterschied** zwischen HomeInfoPoint und Schullogin kennen
+- **Nextcloud/Dateiablage** in Schullogin finden
 
 ### 📚 **Lernmaterialien:**
 - **Belehrungstext:** [OSRW Informatik erste Stunde](https://osrw.de/fachschaften/informatik/erste-stunde/)
