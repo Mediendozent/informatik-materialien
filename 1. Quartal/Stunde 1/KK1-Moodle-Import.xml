@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$module$/top/1.KK - Belehrung</text>
+    </category>
+    <info format="moodle_auto_format">
+      <text></text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 217112  -->
+  <question type="ddwtos">
+    <n>
+      <text>Belehrung Fachraum</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<ul>
+<li><strong>Schüler-Verhalten im Fachraum</strong>
+<ul>
+<li>Der Fachraum ist [[1]] zu halten</li>
+<li>Essen &amp; Trinken nur [[2]]Fachraumes</li>
+<li>Nutzung der technischen Geräte mit [[3]]Händen</li>
+<li>Nutzung der technischen Geräte nur nach Erlaubnis durch zuständige [[4]]</li>
+<li>Stühle [[5]]an ihrem Platz (die Rollen zerstören leider den Bodenbelag)</li>
+<li>Internetnutzung nur nach [[6]]durch Lehrkraft</li>
+<li>Internetnutzung nur auf von der Lehrkraft [[7]]Internetseiten</li>
+<li>Technische Geräte die Mitschüler nutzen, werden in [[8]]gelassen (kein Alt+F4)</li>
+</ul>
+</li>
+</ul>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>4.0000000</defaultgrade>
+    <penalty>0.1000000</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <shuffleanswers>1</shuffleanswers>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist richtig.</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist teilweise richtig.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist falsch.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <dragbox>
+      <text>sauber</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>außerhalb des</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>sauberen</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>Lehrkraft</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>bleiben</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>Ansage</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>genehmigten</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>Ruhe</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>Schüler</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>innerhalb</text>
+      <group>1</group>
+    </dragbox>
+    <dragbox>
+      <text>in Pausenzeiten des</text>
+      <group>1</group>
+    </dragbox>
+  </question>
+
+<!-- question: 217113  -->
+  <question type="gapselect">
+    <n>
+      <text>Hilfreiche Apps</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Apps, die mir in der Schule helfen:</p>
+<p>[[1]] ist die Lernplattform des Bundeslandes [[2]].</p>
+<p>[[3]] ist ein Anmeldedienst für die [[4]].</p>
+<p>[[5]] zeigt die aktuellen [[6]] an.</p>
+<p>[[7]] dient zur [[8]].</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>4.0000000</defaultgrade>
+    <penalty>0.1000000</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <shuffleanswers>1</shuffleanswers>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist richtig.</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist teilweise richtig.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist falsch.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <selectoption>
+      <text>LernSax</text>
+      <group>1</group>
+    </selectoption>
+    <selectoption>
+      <text>Sachsen</text>
+      <group>1</group>
+    </selectoption>
+    <selectoption>
+      <text>Schullogin</text>
+      <group>1</group>
+    </selectoption>
+    <selectoption>
+      <text>Lernplattform</text>
+      <group>1</group>
+    </selectoption>
+    <selectoption>
+      <text>HomeInfoPoint</text>
+      <group>1</group>
+    </selectoption>
+    <selectoption>
+      <text>Zensuren</text>
+      <group>1</group>
+    </selectoption>
+    <selectoption>
+      <text>MensaMax</text>
+      <group>1</group>
+    </selectoption>
+    <selectoption>
+      <text>Essensbestellung</text>
+      <group>1</group>
+    </selectoption>
+  </question>
+
+<!-- Weitere Fragen gekürzt für Übersichtlichkeit -->
+
+</quiz>
