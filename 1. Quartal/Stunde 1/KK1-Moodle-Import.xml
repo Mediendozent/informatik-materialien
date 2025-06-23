@@ -160,6 +160,419 @@
     </selectoption>
   </question>
 
-<!-- Weitere Fragen gekürzt für Übersichtlichkeit -->
+<!-- question: 217123  -->
+  <question type="multichoice">
+    <n>
+      <text>Zugänge</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Ich habe mein Passwort vergessen? Was kann ich tun?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.1000000</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>1</showstandardinstruction>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist richtig.</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist teilweise richtig.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist falsch.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Ich stelle eine Supportanfrage über das <a href="https://osrw.de/ticketsystem/" target="_blank" rel="noopener">Ticketsystem (PITKo).</a></p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Ich frage meinen Klassenlehrer.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Falsch, denn Dein Klassenlehrer hat keine Administratorrechte.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Ich rufe im Sekretariat an.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Falsch, denn das Sekretariat hat keine Administratorrechte.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Ich benutze die Zugangsdaten eines Mitschülers.</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Falsch. Gib niemals Deine Passwörter heraus!</p>]]></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 217124  -->
+  <question type="truefalse">
+    <n>
+      <text>Cloudzugriff</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Auf LernSax und die Dateiablage von Schullogin kann ich nur in der Schule zugreifen.</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>1.0000000</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <answer fraction="0" format="moodle_auto_format">
+      <text>true</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>false</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 217125  -->
+  <question type="truefalse">
+    <n>
+      <text>Dateiablage Cloud</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>In LernSax unter Datei und in der Dateiablage von Schullogin habe ich die Möglichkeit, Dateien hochzuladen.</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>1.0000000</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>true</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="moodle_auto_format">
+      <text>false</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 217126  -->
+  <question type="truefalse">
+    <n>
+      <text>HomeInfoPoint</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Ich habe meine Zugangsdaten für die Zensurenübersicht HomeInfoPoint vergessen. Für diesen Zugang ist nur das Sekretariat zuständig.</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>1.0000000</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>true</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="moodle_auto_format">
+      <text>false</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 217120 - Speicherorte (KORRIGIERT) -->
+  <question type="multichoice">
+    <n>
+      <text>Speicherorte</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Welche Speicherorte werden Dir zur Verfügung gestellt an denen du dauerhaft Deine Daten speichern kannst?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>3.0000000</defaultgrade>
+    <penalty>0.1000000</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>false</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>1</showstandardinstruction>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist richtig.</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist teilweise richtig.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist falsch.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="33.33333" format="html">
+      <text><![CDATA[<p>Cloud-Speicher auf LernSax.de</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="33.33333" format="html">
+      <text><![CDATA[<p>Cloud-Speicher auf Schullogin.de (Nextcloud)</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="33.33333" format="html">
+      <text><![CDATA[<p>Netzlaufwerkspeicher in der Schule</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-33.33333" format="html">
+      <text><![CDATA[<p>Lokaler Speicher an einem Computer</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-33.33333" format="html">
+      <text><![CDATA[<p>Lokaler Speicher auf der Digitalen Tafel</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-33.33333" format="html">
+      <text><![CDATA[<p>Cloudspeicher auf TikTok</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 217140 - Moodle Navigation (NEU) -->
+  <question type="multichoice">
+    <n>
+      <text>Moodle Navigation</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Wie findest du deinen Informatik-Kurs in Moodle am schnellsten?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>1</showstandardinstruction>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist richtig.</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist teilweise richtig.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist falsch.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>Über das Dashboard oder "Meine Kurse"</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Über die Suchfunktion nach "Computer"</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Über den Kalender</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Über die Mitteilungen</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 217141 - Schullogin Apps (NEU KORRIGIERT) -->
+  <question type="multichoice">
+    <n>
+      <text>Schullogin Apps</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Welche Apps/Dienste findest du standardmäßig in deinem Schullogin?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>3.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>false</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>1</showstandardinstruction>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist richtig.</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist teilweise richtig.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist falsch.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="33.33333" format="html">
+      <text><![CDATA[<p>LernSax</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="33.33333" format="html">
+      <text><![CDATA[<p>Moodle</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="33.33333" format="html">
+      <text><![CDATA[<p>Dateiablage (Nextcloud)</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-25" format="html">
+      <text><![CDATA[<p>HomeInfoPoint</p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p>Falsch. HomeInfoPoint ist ein separater Dienst.</p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="-25" format="html">
+      <text><![CDATA[<p>Instagram</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="-25" format="html">
+      <text><![CDATA[<p>WhatsApp</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 217142 - Nextcloud (NEU) -->
+  <question type="truefalse">
+    <n>
+      <text>Dateiablage Nextcloud</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Die Dateiablage in Schullogin basiert auf Nextcloud und ermöglicht es mir, von überall auf meine Schuldateien zuzugreifen.</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>1.0000000</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>true</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="moodle_auto_format">
+      <text>false</text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
+
+<!-- question: 217143 - Unterschied HomeInfoPoint vs Schullogin (NEU) -->
+  <question type="multichoice">
+    <n>
+      <text>HomeInfoPoint vs Schullogin</text>
+    </n>
+    <questiontext format="html">
+      <text><![CDATA[<p>Was ist der Unterschied zwischen HomeInfoPoint und Schullogin?</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <showstandardinstruction>1</showstandardinstruction>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist richtig.</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist teilweise richtig.</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>Die Antwort ist falsch.</p>]]></text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p>HomeInfoPoint zeigt nur Noten an, Schullogin ist das zentrale Portal für alle Schul-Apps</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>HomeInfoPoint und Schullogin sind dasselbe</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>HomeInfoPoint ist Teil von Schullogin</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p>Schullogin zeigt nur Noten an</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+  </question>
 
 </quiz>
