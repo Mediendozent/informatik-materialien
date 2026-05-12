@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDUBreakout – Operation HACK</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #080c08;
+            color: #00e838;
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .wrapper { max-width: 820px; margin: 0 auto; }
+
+        /* Password tracker */
+        .pw-tracker {
+            display: none;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .pw-tracker.visible { display: flex; }
+
+        .pw-slot-wrap { text-align: center; }
+        .pw-slot-label { font-size: 0.6em; color: #444; display: block; margin-bottom: 4px; letter-spacing: 1px; }
+        .pw-slot {
+            width: 58px;
+            height: 58px;
+            border: 2px solid #1a3a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #1a3a1a;
+            background: #050d05;
+            transition: all 0.5s;
+        }
+        .pw-slot.unlocked {
+            border-color: #00e838;
+            color: #00e838;
+            background: #0a2a0a;
+            box-shadow: 0 0 14px rgba(0, 232, 56, 0.5);
+        }
+
+        /* Terminal */
+        .terminal {
+            background: #0c110c;
+            border: 1px solid #00cc30;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 200, 50, 0.12);
+        }
+        .terminal-bar {
+            background: #141e14;
+            border-bottom: 1px solid #00cc30;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .dot-r { background: #ff5f57; }
+        .dot-y { background: #febc2e; }
+        .dot-g { background: #28c840; }
+        .bar-title { color: #00cc30; font-size: 12px; opacity: 0.55; margin-left: auto; }
+        .terminal-body { padding: 32px; }
+
+        /* Screens */
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        /* Typography */
+        h1 { font-size: 1.75em; margin-bottom: 8px; text-shadow: 0 0 14px rgba(0,232,56,0.35); }
+        h2 { font-size: 1.1em; color: #009918; margin-bottom: 22px; border-bottom: 1px solid #002a00; padding-bottom: 9px; }
+        h3 { font-size: 0.88em; color: #008015; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
+        p { line-height: 1.78; margin-bottom: 12px; color: #a0dda0; font-size: 0.94em; }
+
+        .puzzle-number {
+            display: inline-block;
+            font-size: 0.75em;
+            color: #005500;
+            border: 1px solid #003a00;
+            padding: 3px 10px;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        /* Warning banner */
+        .warning {
+            background: #1a0800;
+            border: 2px solid #ff6600;
+            color: #ff6600;
+            text-align: center;
+            padding: 14px;
+            font-size: 1.05em;
+            letter-spacing: 4px;
+            margin-bottom: 24px;
+            animation: blink 2s step-start infinite;
+        }
+        .warning.ok {
+            background: #001800;
+            border-color: #00ff88;
+            color: #00ff88;
+            animation: none;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+        /* Theory box */
+        .theory-box {
+            background: #060f06;
+            border: 1px solid #004000;
+            border-left: 4px solid #009918;
+            padding: 16px 20px;
+            margin: 18px 0;
+        }
+
+        /* Encrypted block */
+        .encrypted-block {
+            background: #04080a;
+            border: 1px solid #00cc30;
+            border-left: 4px solid #00e838;
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+        .encrypted-label {
+            font-size: 0.62em;
+            letter-spacing: 2px;
+            opacity: 0.45;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .encrypted-text {
+            font-size: 1.45em;
+            letter-spacing: 4px;
+            text-shadow: 0 0 8px rgba(0, 232, 56, 0.35);
+        }
+
+        /* Tool box */
+        .tool-box {
+            background: #070d07;
+            border: 1px solid #003000;
+            border-radius: 4px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 0.85em;
+        }
+
+        /* Caesar table */
+        .caesar-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 2px;
+            text-align: center;
+            font-size: 0.78em;
+        }
+        .caesar-table td {
+            padding: 5px 2px;
+            background: #0a1a0a;
+            border-radius: 2px;
+        }
+        .caesar-table .row-plain td { color: #ff9900; }
+        .caesar-table .row-cipher td { color: #00e838; }
+        .row-label { color: #444 !important; text-align: left !important; font-size: 0.8em; padding-right: 5px !important; background: transparent !important; }
+
+        /* Atbash table */
+        .atbash-block { font-size: 0.78em; }
+        .atbash-row { display: flex; gap: 2px; margin-bottom: 2px; }
+        .atbash-cell { flex: 1; text-align: center; padding: 5px 0; border-radius: 2px; }
+        .atbash-row.plain .atbash-cell  { background: #1a2a0a; color: #ff9900; }
+        .atbash-row.arrows .atbash-cell { background: transparent; color: #335533; font-size: 1.1em; }
+        .atbash-row.cipher .atbash-cell { background: #0a1a0a; color: #00e838; }
+
+        /* Morse table */
+        .morse-table { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+        .morse-item {
+            background: #0a1a0a;
+            border-radius: 2px;
+            padding: 5px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .morse-l { color: #00e838; font-weight: bold; }
+        .morse-c { color: #557755; font-size: 0.9em; letter-spacing: 1px; }
+
+        /* Binary bit table */
+        .bit-table { width: 100%; border-collapse: separate; border-spacing: 3px; text-align: center; }
+        .bit-table td { padding: 8px; border-radius: 3px; }
+        .bit-header td { background: #0a1e0a; color: #669966; font-size: 0.85em; }
+        .bit-code td { background: #040f04; color: #ff9900; font-size: 1.5em; font-weight: bold; }
+        .bit-weight td { background: #060d06; color: #00aa20; font-size: 0.85em; }
+        .bit-sum-row td { background: #030803; color: #009918; font-size: 0.82em; padding: 10px; }
+        .bit-label { color: #446644 !important; font-size: 0.75em !important; text-align: left !important; }
+
+        .alphabet-ref { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 12px; }
+        .alpha-item { background: #0a1a0a; border-radius: 2px; padding: 3px 7px; font-size: 0.74em; color: #557755; }
+
+        /* Answer area */
+        .answer-area { margin-top: 26px; }
+        .answer-area label { display: block; font-size: 0.78em; letter-spacing: 2px; color: #008015; margin-bottom: 9px; }
+        .answer-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+        input.answer-input {
+            background: #030903;
+            border: 2px solid #009918;
+            color: #00e838;
+            font-family: 'Courier New', monospace;
+            font-size: 1.6em;
+            padding: 10px 14px;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            width: 88px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input.answer-input:focus { border-color: #00e838; box-shadow: 0 0 12px rgba(0,232,56,0.25); }
+        input.answer-input.shake { animation: shake 0.4s; border-color: #ff4040; }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
+
+        /* Buttons */
+        .btn {
+            background: transparent;
+            border: 1px solid currentColor;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88em;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.15s;
+        }
+        .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+        .btn-check { color: #00e838; }
+        .btn-check:hover:not(:disabled) { background: #00e838; color: #080c08; }
+        .btn-hint { color: #555; font-size: 0.8em; padding: 8px 14px; }
+        .btn-hint:hover:not(:disabled) { color: #ffcc00; border-color: #ffcc00; }
+        .btn-start { color: #00e838; font-size: 1.1em; padding: 14px 35px; margin-top: 20px; }
+        .btn-start:hover { background: #00e838; color: #080c08; }
+        .hint-count { color: #333; font-size: 0.75em; }
+
+        /* Feedback */
+        .feedback { display: none; margin-top: 12px; padding: 10px 14px; font-size: 0.88em; line-height: 1.6; }
+        .feedback.err  { display: block; color: #ff5050; border-left: 3px solid #ff5050; }
+        .feedback.hint { display: block; color: #ffcc00; border-left: 3px solid #ffcc00; }
+        .feedback.ok   { display: block; color: #00ff88; border-left: 3px solid #00ff88; }
+
+        /* Success screen */
+        .big-code { display: flex; justify-content: center; gap: 14px; margin: 28px 0; }
+        .big-char {
+            width: 68px; height: 68px;
+            border: 2px solid #00e838;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.4em;
+            background: #0a2a0a;
+            animation: glow 1.8s infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 8px rgba(0,232,56,0.3); }
+            to   { box-shadow: 0 0 28px rgba(0,232,56,0.8); }
+        }
+
+        .reflection {
+            background: #060f06;
+            border: 1px solid #004000;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .reflection ol { padding-left: 20px; }
+        .reflection li { color: #a0dda0; margin: 8px 0; line-height: 1.65; font-size: 0.9em; }
+
+        .next-steps {
+            background: #070d04;
+            border: 1px solid #334400;
+            padding: 20px;
+            margin-top: 18px;
+            font-size: 0.9em;
+            color: #aabb88;
+        }
+        .next-steps h3 { color: #aabb88; margin-bottom: 10px; }
+        .next-steps ul { padding-left: 18px; margin-top: 8px; }
+        .next-steps li { margin: 6px 0; }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- Password tracker (appears after starting) -->
+    <div id="pw-tracker" class="pw-tracker">
+        <div class="pw-slot-wrap">
+            <span class="pw-slot-label">CAESAR</span>
+            <div class="pw-slot" id="slot-0">?</div>
+        </div>
+        <div class="pw-slot-wrap">
+            <span class="pw-slot-label">ATBASH</span>
+            <div class="pw-slot" id="slot-1">?</div>
+        </div>
+        <div class="pw-slot-wrap">
+            <span class="pw-slot-label">MORSE</span>
+            <div class="pw-slot" id="slot-2">?</div>
+        </div>
+        <div class="pw-slot-wrap">
+            <span class="pw-slot-label">BINÄR</span>
+            <div class="pw-slot" id="slot-3">?</div>
+        </div>
+    </div>
+
+    <div class="terminal">
+        <div class="terminal-bar">
+            <span class="dot dot-r"></span>
+            <span class="dot dot-y"></span>
+            <span class="dot dot-g"></span>
+            <span class="bar-title">SCHULARCHIV_TERMINAL v2.4 &nbsp;|&nbsp; EDUBreakout: Verschlüsselung</span>
+        </div>
+        <div class="terminal-body">
+
+            <!-- ===== SCREEN 0: MISSION BRIEFING ===== -->
+            <div id="screen-0" class="screen active">
+                <div class="warning">⚠&nbsp; ZUGRIFF GESPERRT &nbsp;⚠</div>
+                <h1>Operation HACK</h1>
+                <h2>Mission Briefing // Geheimauftrag</h2>
+
+                <div class="theory-box">
+                    <p>Es ist Montag, 7:45 Uhr. Als ihr den Computerraum betritt, blinkt auf jedem Bildschirm dieselbe Warnung:</p>
+                    <p style="color:#00e838; font-size:1.05em;"><strong>„Das Schularchiv wurde verschlüsselt. Kein Zugriff auf Unterrichtsmaterialien, keine Stundenpläne, keine Noten – bis das Passwort wiederhergestellt wird."</strong></p>
+                    <p>Ein unbekannter Hacker mit dem Codenamen <strong>Agent X</strong> hat das Archiv gesperrt. Er hat 4 Hinweise hinterlassen – jeden in einer anderen Verschlüsselungstechnik.</p>
+                </div>
+
+                <p><strong>Eure Mission:</strong> Löst alle 4 Rätsel. Jedes Rätsel lehrt euch eine Verschlüsselungstechnik und enthüllt einen Buchstaben des Passworts.</p>
+                <p>Lest die Erklärungen sorgfältig, nutzt die Decoder-Werkzeuge und fordert Tipps an, wenn ihr nicht weiterkommt.</p>
+
+                <button class="btn btn-start" onclick="startGame()">▶&nbsp; Mission starten</button>
+            </div>
+
+            <!-- ===== SCREEN 1: CAESAR ===== -->
+            <div id="screen-1" class="screen">
+                <span class="puzzle-number">RÄTSEL 1 / 4 – Caesar-Verschlüsselung</span>
+                <h1>Der Klassiker aus der Antike</h1>
+                <h2>Buchstaben verschieben mit Julius Caesar</h2>
+
+                <div class="theory-box">
+                    <h3>Was ist die Caesar-Verschlüsselung?</h3>
+                    <p>Julius Caesar (100–44 v. Chr.) schickte Befehle an seine Feldherren – aber damit Feinde die Botschaft nicht lesen konnten, verschlüsselte er jeden Buchstaben. Sein Trick: Er verschob jeden Buchstaben um eine feste Anzahl von Stellen im Alphabet.</p>
+                    <p>Bei Verschiebung <strong>+3</strong> wird aus A ein D, aus B ein E, aus Z ein C (nach Z kommt wieder A). Zum <strong>Entschlüsseln</strong> verschiebt man jeden Buchstaben einfach 3 Stellen <em>zurück</em>.</p>
+                    <p style="font-size:0.88em; color:#669966;">Beispiel: K im Geheimtext → K ist der 11. Buchstabe → 11 minus 3 = 8 → der 8. Buchstabe = H</p>
+                </div>
+
+                <div class="encrypted-block">
+                    <span class="encrypted-label">// NACHRICHT VON AGENT X // CAESAR-VERSCHLÜSSELUNG, VERSCHIEBUNG +3 //</span>
+                    <div class="encrypted-text">GHLQ FRGH-EXFKVWDEH LVW: K</div>
+                </div>
+
+                <div class="tool-box">
+                    <h3>Decoder-Werkzeug (Geheimtext → Klartext, Verschiebung −3)</h3>
+                    <p style="color:#446644; margin-bottom:8px;">Geheimtext (orange) → 3 Stellen zurück → Klartext (grün)</p>
+                    <table class="caesar-table">
+                        <tr class="row-plain">
+                            <td class="row-label">Geheim:</td>
+                            <td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><td>O</td><td>P</td>
+                        </tr>
+                        <tr class="row-cipher">
+                            <td class="row-label">Klar:</td>
+                            <td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td>
+                        </tr>
+                    </table>
+                    <table class="caesar-table" style="margin-top:3px">
+                        <tr class="row-plain">
+                            <td class="row-label">Geheim:</td>
+                            <td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>A</td><td>B</td><td>C</td>
+                        </tr>
+                        <tr class="row-cipher">
+                            <td class="row-label">Klar:</td>
+                            <td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="answer-area">
+                    <label>DEIN CODE-BUCHSTABE (letztes Zeichen der entschlüsselten Nachricht):</label>
+                    <div class="answer-row">
+                        <input type="text" id="ans-1" class="answer-input" maxlength="1" placeholder="?" onkeydown="if(event.key==='Enter') checkAnswer(1)">
+                        <button class="btn btn-check" onclick="checkAnswer(1)">Bestätigen</button>
+                        <button class="btn btn-hint" onclick="showHint(1)">Tipp anfordern <span class="hint-count" id="hc-1">[0/3]</span></button>
+                    </div>
+                    <div class="feedback" id="fb-1"></div>
+                </div>
+            </div>
+
+            <!-- ===== SCREEN 2: ATBASH ===== -->
+            <div id="screen-2" class="screen">
+                <span class="puzzle-number">RÄTSEL 2 / 4 – Atbash-Verschlüsselung</span>
+                <h1>Der Spiegelcode</h1>
+                <h2>Das gespiegelte Alphabet</h2>
+
+                <div class="theory-box">
+                    <h3>Was ist Atbash?</h3>
+                    <p>Atbash stammt aus dem alten Hebräischen und ist eine der ältesten Verschlüsselungen der Welt. Das Prinzip: Das Alphabet wird gespiegelt. Der erste Buchstabe (A) wird zum letzten (Z), der zweite (B) zum vorletzten (Y), und so weiter.</p>
+                    <p>Das Besondere: Atbash ist <em>selbstinvers</em> – Entschlüsseln und Verschlüsseln sind identisch. Wer einen Atbash-Text nochmals durch Atbash schickt, bekommt den Klartext zurück.</p>
+                    <p style="font-size:0.88em; color:#669966;">Das letzte Zeichen in der Nachricht ist <strong>Z</strong>. Was ergibt Z im Spiegelcode?</p>
+                </div>
+
+                <div class="encrypted-block">
+                    <span class="encrypted-label">// NACHRICHT VON AGENT X // ATBASH-SPIEGELCODE //</span>
+                    <div class="encrypted-text">WVRM XLWV-YFXHSGZYV RHG: Z</div>
+                </div>
+
+                <div class="tool-box">
+                    <h3>Decoder-Werkzeug (Atbash-Tabelle)</h3>
+                    <p style="color:#446644; margin-bottom:10px;">Obere Reihe = Geheimtext &nbsp;↕&nbsp; Untere Reihe = Klartext</p>
+                    <div class="atbash-block">
+                        <div class="atbash-row plain">
+                            <div class="atbash-cell">A</div><div class="atbash-cell">B</div><div class="atbash-cell">C</div><div class="atbash-cell">D</div><div class="atbash-cell">E</div><div class="atbash-cell">F</div><div class="atbash-cell">G</div><div class="atbash-cell">H</div><div class="atbash-cell">I</div><div class="atbash-cell">J</div><div class="atbash-cell">K</div><div class="atbash-cell">L</div><div class="atbash-cell">M</div>
+                        </div>
+                        <div class="atbash-row arrows">
+                            <div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div>
+                        </div>
+                        <div class="atbash-row cipher">
+                            <div class="atbash-cell">Z</div><div class="atbash-cell">Y</div><div class="atbash-cell">X</div><div class="atbash-cell">W</div><div class="atbash-cell">V</div><div class="atbash-cell">U</div><div class="atbash-cell">T</div><div class="atbash-cell">S</div><div class="atbash-cell">R</div><div class="atbash-cell">Q</div><div class="atbash-cell">P</div><div class="atbash-cell">O</div><div class="atbash-cell">N</div>
+                        </div>
+                    </div>
+                    <div style="height:5px"></div>
+                    <div class="atbash-block">
+                        <div class="atbash-row plain">
+                            <div class="atbash-cell">N</div><div class="atbash-cell">O</div><div class="atbash-cell">P</div><div class="atbash-cell">Q</div><div class="atbash-cell">R</div><div class="atbash-cell">S</div><div class="atbash-cell">T</div><div class="atbash-cell">U</div><div class="atbash-cell">V</div><div class="atbash-cell">W</div><div class="atbash-cell">X</div><div class="atbash-cell">Y</div><div class="atbash-cell">Z</div>
+                        </div>
+                        <div class="atbash-row arrows">
+                            <div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div><div class="atbash-cell">↕</div>
+                        </div>
+                        <div class="atbash-row cipher">
+                            <div class="atbash-cell">M</div><div class="atbash-cell">L</div><div class="atbash-cell">K</div><div class="atbash-cell">J</div><div class="atbash-cell">I</div><div class="atbash-cell">H</div><div class="atbash-cell">G</div><div class="atbash-cell">F</div><div class="atbash-cell">E</div><div class="atbash-cell">D</div><div class="atbash-cell">C</div><div class="atbash-cell">B</div><div class="atbash-cell">A</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answer-area">
+                    <label>DEIN CODE-BUCHSTABE (entschlüsseltes letztes Zeichen – was ergibt Z?):</label>
+                    <div class="answer-row">
+                        <input type="text" id="ans-2" class="answer-input" maxlength="1" placeholder="?" onkeydown="if(event.key==='Enter') checkAnswer(2)">
+                        <button class="btn btn-check" onclick="checkAnswer(2)">Bestätigen</button>
+                        <button class="btn btn-hint" onclick="showHint(2)">Tipp anfordern <span class="hint-count" id="hc-2">[0/3]</span></button>
+                    </div>
+                    <div class="feedback" id="fb-2"></div>
+                </div>
+            </div>
+
+            <!-- ===== SCREEN 3: MORSE ===== -->
+            <div id="screen-3" class="screen">
+                <span class="puzzle-number">RÄTSEL 3 / 4 – Morsecode</span>
+                <h1>Punkte und Striche</h1>
+                <h2>Die Geheimsprache des Telegraphen</h2>
+
+                <div class="theory-box">
+                    <h3>Was ist der Morsecode?</h3>
+                    <p>Samuel Morse erfand 1836 ein Codesystem für den Telegraphen: Statt Buchstaben werden kurze Impulse (<strong>·</strong>) und lange Impulse (<strong>–</strong>) übertragen. Jeder Buchstabe des Alphabets hat eine eindeutige Kombination aus Punkten und Strichen.</p>
+                    <p>Morsecode wurde bis ins 20. Jahrhundert auf Schiffen und in der Luftfahrt eingesetzt. Der internationale Notruf <strong>SOS</strong> lautet: <strong>··· – – – ···</strong></p>
+                    <p style="font-size:0.88em; color:#669966;">Suche in der Tabelle die Zeichenfolge <strong>-.-.</strong> und finde den zugehörigen Buchstaben.</p>
+                </div>
+
+                <div class="encrypted-block">
+                    <span class="encrypted-label">// NACHRICHT VON AGENT X // MORSECODE //</span>
+                    <div class="encrypted-text" style="font-size:2.3em; letter-spacing:10px;">-.-.</div>
+                </div>
+
+                <div class="tool-box">
+                    <h3>Morse-Alphabet (· = kurz, - = lang)</h3>
+                    <div class="morse-table">
+                        <div class="morse-item"><span class="morse-l">A</span><span class="morse-c">.-</span></div>
+                        <div class="morse-item"><span class="morse-l">B</span><span class="morse-c">-...</span></div>
+                        <div class="morse-item"><span class="morse-l">C</span><span class="morse-c">-.-.</span></div>
+                        <div class="morse-item"><span class="morse-l">D</span><span class="morse-c">-..</span></div>
+                        <div class="morse-item"><span class="morse-l">E</span><span class="morse-c">.</span></div>
+                        <div class="morse-item"><span class="morse-l">F</span><span class="morse-c">..-.</span></div>
+                        <div class="morse-item"><span class="morse-l">G</span><span class="morse-c">--.</span></div>
+                        <div class="morse-item"><span class="morse-l">H</span><span class="morse-c">....</span></div>
+                        <div class="morse-item"><span class="morse-l">I</span><span class="morse-c">..</span></div>
+                        <div class="morse-item"><span class="morse-l">J</span><span class="morse-c">.---</span></div>
+                        <div class="morse-item"><span class="morse-l">K</span><span class="morse-c">-.-</span></div>
+                        <div class="morse-item"><span class="morse-l">L</span><span class="morse-c">.-..</span></div>
+                        <div class="morse-item"><span class="morse-l">M</span><span class="morse-c">--</span></div>
+                        <div class="morse-item"><span class="morse-l">N</span><span class="morse-c">-.</span></div>
+                        <div class="morse-item"><span class="morse-l">O</span><span class="morse-c">---</span></div>
+                        <div class="morse-item"><span class="morse-l">P</span><span class="morse-c">.--.</span></div>
+                        <div class="morse-item"><span class="morse-l">Q</span><span class="morse-c">--.-</span></div>
+                        <div class="morse-item"><span class="morse-l">R</span><span class="morse-c">.-.</span></div>
+                        <div class="morse-item"><span class="morse-l">S</span><span class="morse-c">...</span></div>
+                        <div class="morse-item"><span class="morse-l">T</span><span class="morse-c">-</span></div>
+                        <div class="morse-item"><span class="morse-l">U</span><span class="morse-c">..-</span></div>
+                        <div class="morse-item"><span class="morse-l">V</span><span class="morse-c">...-</span></div>
+                        <div class="morse-item"><span class="morse-l">W</span><span class="morse-c">.--</span></div>
+                        <div class="morse-item"><span class="morse-l">X</span><span class="morse-c">-..-</span></div>
+                        <div class="morse-item"><span class="morse-l">Y</span><span class="morse-c">-.--</span></div>
+                        <div class="morse-item"><span class="morse-l">Z</span><span class="morse-c">--..</span></div>
+                    </div>
+                </div>
+
+                <div class="answer-area">
+                    <label>DEIN CODE-BUCHSTABE (welcher Buchstabe steht für -.-. ?):</label>
+                    <div class="answer-row">
+                        <input type="text" id="ans-3" class="answer-input" maxlength="1" placeholder="?" onkeydown="if(event.key==='Enter') checkAnswer(3)">
+                        <button class="btn btn-check" onclick="checkAnswer(3)">Bestätigen</button>
+                        <button class="btn btn-hint" onclick="showHint(3)">Tipp anfordern <span class="hint-count" id="hc-3">[0/3]</span></button>
+                    </div>
+                    <div class="feedback" id="fb-3"></div>
+                </div>
+            </div>
+
+            <!-- ===== SCREEN 4: BINARY ===== -->
+            <div id="screen-4" class="screen">
+                <span class="puzzle-number">RÄTSEL 4 / 4 – Binärcode</span>
+                <h1>Die Sprache der Computer</h1>
+                <h2>Nur zwei Zustände: 0 und 1</h2>
+
+                <div class="theory-box">
+                    <h3>Was ist Binärcode?</h3>
+                    <p>Computer kennen intern nur zwei Zustände: <strong>Strom an (1)</strong> oder <strong>Strom aus (0)</strong>. Jede Zahl, jeder Buchstabe, jedes Bild wird letztlich als Folge von Einsen und Nullen gespeichert – das nennt sich <strong>Binärsystem</strong>.</p>
+                    <p>Jede Stelle hat einen festen Stellenwert (von rechts: 1, 2, 4, 8, 16 ...). Um eine Binärzahl in eine Dezimalzahl umzurechnen, multipliziert man jede Stelle mit ihrem Stellenwert und addiert die Ergebnisse.</p>
+                    <p style="font-size:0.88em; color:#669966;">Das Ergebnis ist eine Zahl → suche den Buchstaben an dieser Position im Alphabet (A=1, B=2, ...).</p>
+                </div>
+
+                <div class="encrypted-block">
+                    <span class="encrypted-label">// NACHRICHT VON AGENT X // BINÄRCODE → ALPHABET-POSITION //</span>
+                    <div class="encrypted-text" style="font-size:2.5em; letter-spacing:14px;">1011</div>
+                </div>
+
+                <div class="tool-box">
+                    <h3>Schritt-für-Schritt Decoder</h3>
+                    <table class="bit-table">
+                        <tr class="bit-header">
+                            <td class="bit-label">Stelle</td>
+                            <td>Stelle 4</td>
+                            <td>Stelle 3</td>
+                            <td>Stelle 2</td>
+                            <td>Stelle 1</td>
+                        </tr>
+                        <tr class="bit-header">
+                            <td class="bit-label">Stellenwert</td>
+                            <td>8</td>
+                            <td>4</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="bit-code">
+                            <td class="bit-label" style="font-size:0.75em; color:#446644;">Binärziffer</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr class="bit-weight">
+                            <td class="bit-label">Rechnung</td>
+                            <td>1 × 8 = 8</td>
+                            <td>0 × 4 = 0</td>
+                            <td>1 × 2 = 2</td>
+                            <td>1 × 1 = 1</td>
+                        </tr>
+                        <tr class="bit-sum-row">
+                            <td colspan="5">→&nbsp; Summe: &nbsp;8 + 0 + 2 + 1 = <strong style="font-size:1.4em; color:#00e838;">11</strong> &nbsp;– welcher Buchstabe hat die Position 11?</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top:14px; color:#446644; font-size:0.85em;">Alphabet-Referenz (A=1 bis Z=26):</p>
+                    <div class="alphabet-ref">
+                        <div class="alpha-item">A=1</div><div class="alpha-item">B=2</div><div class="alpha-item">C=3</div><div class="alpha-item">D=4</div>
+                        <div class="alpha-item">E=5</div><div class="alpha-item">F=6</div><div class="alpha-item">G=7</div><div class="alpha-item">H=8</div>
+                        <div class="alpha-item">I=9</div><div class="alpha-item">J=10</div><div class="alpha-item">K=11</div><div class="alpha-item">L=12</div>
+                        <div class="alpha-item">M=13</div><div class="alpha-item">N=14</div><div class="alpha-item">O=15</div><div class="alpha-item">P=16</div>
+                        <div class="alpha-item">Q=17</div><div class="alpha-item">R=18</div><div class="alpha-item">S=19</div><div class="alpha-item">T=20</div>
+                        <div class="alpha-item">U=21</div><div class="alpha-item">V=22</div><div class="alpha-item">W=23</div><div class="alpha-item">X=24</div>
+                        <div class="alpha-item">Y=25</div><div class="alpha-item">Z=26</div>
+                    </div>
+                </div>
+
+                <div class="answer-area">
+                    <label>DEIN CODE-BUCHSTABE (Buchstabe an Position 11):</label>
+                    <div class="answer-row">
+                        <input type="text" id="ans-4" class="answer-input" maxlength="1" placeholder="?" onkeydown="if(event.key==='Enter') checkAnswer(4)">
+                        <button class="btn btn-check" onclick="checkAnswer(4)">Bestätigen</button>
+                        <button class="btn btn-hint" onclick="showHint(4)">Tipp anfordern <span class="hint-count" id="hc-4">[0/3]</span></button>
+                    </div>
+                    <div class="feedback" id="fb-4"></div>
+                </div>
+            </div>
+
+            <!-- ===== SCREEN 5: SUCCESS ===== -->
+            <div id="screen-5" class="screen">
+                <div class="warning ok">✓&nbsp; ARCHIV ENTSPERRT &nbsp;✓</div>
+                <h1>Mission erfolgreich!</h1>
+                <h2>Das Passwort wurde wiederhergestellt:</h2>
+
+                <div class="big-code">
+                    <div class="big-char">H</div>
+                    <div class="big-char">A</div>
+                    <div class="big-char">C</div>
+                    <div class="big-char">K</div>
+                </div>
+
+                <p>Glückwunsch – ihr habt alle 4 Verschlüsselungstechniken erfolgreich geknackt und das Schularchiv befreit!</p>
+
+                <div class="reflection">
+                    <h3>Reflexion: Was habe ich gelernt?</h3>
+                    <p style="color:#669966; font-size:0.88em; margin-bottom:12px;">Beantworte diese Fragen in deinem Heft oder diskutiere sie im Team:</p>
+                    <ol>
+                        <li><strong>Vergleich:</strong> Was ist der Unterschied zwischen Caesar- und Atbash-Verschlüsselung? Was haben beide gemeinsam?</li>
+                        <li><strong>Sicherheit:</strong> Welche der 4 Methoden wäre am schwersten zu knacken – und warum?</li>
+                        <li><strong>Binär:</strong> Warum reicht Binärcode allein nicht als Verschlüsselung aus?</li>
+                        <li><strong>Alltag:</strong> Wo begegnet dir Verschlüsselung im Alltag? (Tipp: Apps, WLAN-Passwort, Online-Banking, HTTPS...)</li>
+                        <li><strong>Bonus:</strong> Verschlüssele deinen eigenen Namen mit Caesar +3. Was ergibt sich?</li>
+                    </ol>
+                </div>
+
+                <div class="next-steps">
+                    <h3>Nächster Schritt: Baue dein eigenes EDUBreakout!</h3>
+                    <p>Du hast alle Werkzeuge, um ein eigenes Rätselspiel zu erstellen. Öffne die Datei <strong>Eigenes-Breakout-Erstellen.md</strong> aus dem gleichen Ordner.</p>
+                    <ul>
+                        <li>Wähle ein eigenes Thema und eine Rahmengeschichte</li>
+                        <li>Erstelle mindestens 3 Rätsel mit verschiedenen Verschlüsselungen</li>
+                        <li>Tauscht eure fertigen Spiele aus und löst sie gegenseitig!</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div><!-- terminal-body -->
+    </div><!-- terminal -->
+</div><!-- wrapper -->
+
+<script>
+    const ANSWERS = { 1: 'H', 2: 'A', 3: 'C', 4: 'K' };
+    const hintCounts = { 1: 0, 2: 0, 3: 0, 4: 0 };
+
+    const HINTS = {
+        1: [
+            'Jeder Buchstabe wurde um 3 Stellen nach rechts verschoben. Zum Entschlüsseln gehe 3 Stellen zurück. Das letzte Zeichen ist K – welcher Buchstabe liegt 3 Stellen vor K?',
+            'K ist der 11. Buchstabe des Alphabets. 11 minus 3 = 8. Zähle: A=1, B=2, C=3, D=4, E=5, F=6, G=7, H=8.',
+            'Die Lösung lautet: H'
+        ],
+        2: [
+            'Beim Atbash-Code wird das Alphabet gespiegelt. Das letzte Zeichen in der Nachricht ist Z. Suche Z in der oberen Zeile der Tabelle – was steht darunter?',
+            'Z ist der 26. Buchstabe. Sein Spiegelbild ist der 1. Buchstabe des Alphabets.',
+            'Die Lösung lautet: A'
+        ],
+        3: [
+            'Suche die Zeichenfolge -.-. (Strich-Punkt-Strich-Punkt) in der Morse-Tabelle. Gehe Zeile für Zeile durch die Buchstaben B, C, D ... und vergleiche das Muster.',
+            'Das gesuchte Zeichen beginnt mit einem langen Strich (-), dann Punkt, dann Strich, dann Punkt. Der Buchstabe liegt am Anfang des Alphabets.',
+            'Die Lösung lautet: C'
+        ],
+        4: [
+            'Schreibe die Stellenwerte auf: 8, 4, 2, 1. Multipliziere jeden mit der Binärziffer an dieser Stelle (1011). Addiere die Ergebnisse.',
+            '1×8 + 0×4 + 1×2 + 1×1 = 8+0+2+1 = 11. Welcher Buchstabe hat die Position 11 im Alphabet? (A=1, B=2, C=3 ...)',
+            'Die Lösung lautet: K'
+        ]
+    };
+
+    function startGame() {
+        document.getElementById('pw-tracker').classList.add('visible');
+        showScreen(1);
+    }
+
+    function showScreen(n) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-' + n).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const input = document.getElementById('ans-' + n);
+        if (input) setTimeout(() => input.focus(), 150);
+    }
+
+    function checkAnswer(n) {
+        const input = document.getElementById('ans-' + n);
+        const fb    = document.getElementById('fb-' + n);
+        const val   = (input.value || '').trim().toUpperCase();
+
+        if (!val) {
+            setFeedback(fb, 'err', '// Bitte einen Buchstaben eingeben.');
+            return;
+        }
+
+        if (val === ANSWERS[n]) {
+            const slot = document.getElementById('slot-' + (n - 1));
+            slot.textContent = ANSWERS[n];
+            slot.classList.add('unlocked');
+
+            setFeedback(fb, 'ok', '✓ RICHTIG! Code-Buchstabe ' + ANSWERS[n] + ' wurde freigeschaltet.');
+            input.disabled = true;
+            document.querySelector('#screen-' + n + ' .btn-check').disabled = true;
+            document.querySelector('#screen-' + n + ' .btn-hint').disabled = true;
+
+            setTimeout(() => showScreen(n + 1), 1500);
+        } else {
+            input.classList.remove('shake');
+            void input.offsetWidth;
+            input.classList.add('shake');
+            setTimeout(() => input.classList.remove('shake'), 450);
+            setFeedback(fb, 'err', '// ZUGRIFF VERWEIGERT. Falsche Antwort – überprüfe deine Entschlüsselung oder fordere einen Tipp an.');
+        }
+    }
+
+    function showHint(n) {
+        const fb = document.getElementById('fb-' + n);
+        const hc = document.getElementById('hc-' + n);
+        const used = hintCounts[n];
+
+        if (used >= 3) {
+            setFeedback(fb, 'hint', '// Alle Tipps aufgebraucht. Die Lösung wurde bereits angezeigt.');
+            return;
+        }
+
+        const hint = HINTS[n][used];
+        hintCounts[n]++;
+        hc.textContent = '[' + hintCounts[n] + '/3]';
+        setFeedback(fb, 'hint', '// Tipp ' + hintCounts[n] + '/3: ' + hint);
+    }
+
+    function setFeedback(el, cls, text) {
+        el.className = 'feedback ' + cls;
+        el.textContent = text;
+    }
+</script>
+</body>
+</html>
